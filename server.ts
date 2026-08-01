@@ -276,7 +276,7 @@ async function startServer() {
   app.post("/api/plugins/execute", handlePluginExecute);
   app.post("/plugins/execute", handlePluginExecute);
 
-  // Phase 8 - Model Router & Multi-Agent Endpoints
+  // Phase 12 Final Enterprise Release - Model Router & Multi-Agent Endpoints
   const handleModelsStatus = (_req: express.Request, res: express.Response) => {
     res.json({
       status: "success",

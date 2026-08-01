@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 from typing import Optional, Dict, Any, List
 from agents.multi_agent_system import multi_agent_system
 
-router = APIRouter(prefix="", tags=["Phase 8 - Multi-Agent Intelligence"])
+router = APIRouter(prefix="", tags=["KIRA AI - Phase 12 (Final Enterprise Release) - Multi-Agent Intelligence"])
 
 class RunAgentTaskRequest(BaseModel):
     goal: str = Field(..., description="High-level goal for multi-agent system execution")

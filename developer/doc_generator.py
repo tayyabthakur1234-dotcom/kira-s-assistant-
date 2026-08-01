@@ -40,7 +40,7 @@ graph TD
     UI --> LiveWS[Gemini Live Audio WebSocket]
     Express --> FastAPI[FastAPI Backend Engine :8000]
     FastAPI --> DevEngine[Phase 10 Developer Intelligence]
-    FastAPI --> ModelRouter[Phase 8 AI Model Router]
+    FastAPI --> ModelRouter[Phase 12 AI Model Router]
     FastAPI --> MemoryEngine[Phase 5 Vector / SQLite Memory]
 ```
 

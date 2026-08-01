@@ -50,7 +50,7 @@ CATEGORY_MODEL_MAP = {
 
 class ModelRouter:
     """
-    KIRA Phase 8 Intelligent AI Model Router.
+    KIRA AI - Phase 12 (Final Enterprise Release) Intelligent AI Model Router.
     Automatically classifies task intents, routes to optimal models,
     executes multi-model consensus/failover, and tracks model health.
     """

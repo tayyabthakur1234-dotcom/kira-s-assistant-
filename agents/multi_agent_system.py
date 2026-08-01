@@ -198,7 +198,7 @@ class PluginAgent(BaseAgent):
 
 class SelfVerificationEngine:
     """
-    KIRA Phase 8 Self-Verification Engine.
+    KIRA AI - Phase 12 (Final Enterprise Release) Self-Verification Engine.
     Evaluates agent task execution results against target standards,
     detects inaccuracies/errors, and executes automated self-fixing retries.
     """

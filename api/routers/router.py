@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 from typing import Optional, Dict, Any, List
 from router.model_router import model_router
 
-router = APIRouter(prefix="", tags=["Phase 8 - AI Model Router"])
+router = APIRouter(prefix="", tags=["KIRA AI - Phase 12 (Final Enterprise Release) - AI Model Router"])
 
 class ModelRouteRequest(BaseModel):
     prompt: str = Field(..., description="User prompt or instruction")

@@ -72,7 +72,7 @@ export const ModelRouterAgentView: React.FC = () => {
       <div className="flex items-center justify-between border-b border-white/10 pb-2">
         <h3 className="text-sm font-semibold tracking-wider uppercase text-cyan-400 flex items-center gap-2">
           <Network className="w-4 h-4 text-cyan-400" />
-          Phase 8 AI Model Router & Multi-Agent Intelligence
+          KIRA AI - Phase 12 (Final Enterprise Release) | AI Model Router & Multi-Agent Intelligence
         </h3>
         <button onClick={fetchData} className="p-1 text-slate-400 hover:text-white transition-colors">
           <RefreshCw className="w-3.5 h-3.5" />
