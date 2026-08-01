@@ -1,0 +1,6 @@
+{
+  "name": "Kira's AI Assistant",
+  "description": "Production Enterprise AI Operating System (Phase 12) featuring real-time Live API voice assistant, 3D hologram avatar, desktop vision, browser automation, developer intelligence engine, and enterprise deployment platform.",
+  "requestFramePermissions": ["microphone", "display-capture"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

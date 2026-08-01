@@ -1,0 +1,106 @@
+name: KIRA AI OS - Build, Test & Release Pipeline
+
+on:
+  push:
+    branches: [ main, release/* ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-test:
+    name: Lint & Test Suite (Python & Frontend)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest httpx
+
+      - name: Run Backend Pytest Suite
+        run: |
+          pytest tests/ -v
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node Dependencies & Build Frontend
+        run: |
+          npm ci
+          npm run build
+
+  build-windows-installer:
+    name: Build Windows MSI, EXE & Portable Installers
+    needs: lint-and-test
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+          npm ci
+
+      - name: Build React Frontend & Bundle Electron App
+        run: |
+          npm run build
+          npx electron-builder --win nsis portable
+
+      - name: Build Python PyInstaller Executable
+        run: |
+          pyinstaller kira.spec
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: KIRA-AI-OS-Windows-Installers
+          path: |
+            dist_electron/*.exe
+            dist_electron/*.msi
+            dist/KIRA_AI_OS_Engine.exe
+
+  create-github-release:
+    name: Create GitHub Release on Tag
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build-windows-installer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: KIRA-AI-OS-Windows-Installers
+          path: release_artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release_artifacts/*
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
